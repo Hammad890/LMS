@@ -1,31 +1,35 @@
 import express, {json} from "express";
-import callDb from "./helpers/db";
-import User from "./models/user";
+import {callDb,config} from "./helpers/db.js";
+import userRouter from "./routes/users.js";
+import bookRouter from "./routes/books.js";
+import cors from "cors"
+import session from "express-session";
 
 
-
-const app= express
+const app= express();
 app.use(json())
-app.use((req,res) => {
-    return res.status(404).json({err:"router not found"})
-})
-app.use((err,req,res,next)=>{
-console.error("Error:",err)
-return res.status(500).json(({err:"Unknown server error"}))
-})
+
+app.use(
+  session({
+    secret: 'xyz-116',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  })
+);
 
 callDb()
-.then(async()=>{
-    const admin = await User.findOne({username:"admin"})
-    if (admin == null){
-        await User.create({username:"",password:"",role:"admin"})
-    }
-    const student= await User.findById(id)
-    if (student == null){
-        await User.create({username:"",password:"",role:"student"})
-    }
-})
-.then (()=>{app.listen(5000)})
-.catch((err)=>{
-    console.err("Failed to connect to database",err)
+
+app.use(
+    cors({
+      origin: "http://localhost:3000",
+      method: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true,
+    })
+  );
+
+app.use("/users",userRouter)
+app.use("/books",bookRouter)
+app.listen(5000, ()=>{
+    console.log("App started")
 })
