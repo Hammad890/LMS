@@ -20,7 +20,7 @@ const UserProvider= ({children})=>{
     useEffect(() => {
       const fetchUser = async () => {
         try {
-          const result = await fetch('http://localhost:5000/users/user', {
+          const result = await fetch('https://lms-smoky-one.vercel.app/users/user', {
             method: 'GET',
             credentials: 'include',
           });
@@ -47,7 +47,7 @@ const UserProvider= ({children})=>{
   const loginUser = async(loginData)=>{
     try{
       console.log('Login Request:', loginData);
-        const response = await fetch ('http://localhost:5000/users',{
+        const response = await fetch ('https://lms-smoky-one.vercel.app//users',{
             method : 'POST',
             headers: {
                 'Content-Type':'application/json'
@@ -73,7 +73,7 @@ const UserProvider= ({children})=>{
 
   const logOut = async()=>{
     try {
-        const response = await fetch ('http://localhost:5000/users/logout',{
+        const response = await fetch ('https://lms-smoky-one.vercel.app/users/logout',{
             method: 'GET',
             credentials: 'include'
         });
