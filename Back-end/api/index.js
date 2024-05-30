@@ -1,7 +1,7 @@
 import express, {json} from "express";
-import {callDb} from "./helpers/db.js";
-import userRouter from "./routes/users.js";
-import bookRouter from "./routes/books.js";
+import {callDb} from "../helpers/db.js";
+import userRouter from "../routes/users.js";
+import bookRouter from "../routes/books.js";
 import cors from "cors"
 import session from "express-session";
 import dotenv from 'dotenv';
