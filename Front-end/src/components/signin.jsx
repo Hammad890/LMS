@@ -53,7 +53,7 @@ useEffect(() => {
     e.preventDefault();
     const newUser = {username, email, password, number, role: userType,}
     try{
-      let result = await fetch ('http://localhost:5000/users/register',{
+      let result = await fetch ('https://lms-smoky-one.vercel.app/users/register',{
         method: 'POST',
         body: JSON.stringify(newUser),
         headers: {

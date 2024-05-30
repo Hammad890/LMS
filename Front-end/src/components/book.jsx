@@ -48,7 +48,7 @@ export default function BookManagement() {
   },[])
 
   const bookData = async()=>{
-    let result = await fetch ('http://localhost:5000/books',{
+    let result = await fetch ('https://lms-smoky-one.vercel.app/books',{
       method: 'GET',
     })
     result= await result.json()
@@ -61,7 +61,7 @@ export default function BookManagement() {
 
   const handleDelete = async(id)=>{
     try {
-    let res =await fetch (`http://localhost:5000/books/${id}`,{
+    let res =await fetch (`https://lms-smoky-one.vercel.app/books/${id}`,{
       method: 'Delete'
     });
     const data = await res.json();

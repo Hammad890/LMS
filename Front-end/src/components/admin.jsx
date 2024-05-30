@@ -55,14 +55,14 @@ export default function ResponsiveDrawer(props) {
   },[])
 
   const borrowedBook= async()=>{
-    let result = await fetch ('http://localhost:5000/users/borrowedbooks',{
+    let result = await fetch ('https://lms-smoky-one.vercel.app/users/borrowedbooks',{
       method: 'GET',
     })
     result= await result.json()
     setBorrowedCount(result.borrowed.length)
   }
   const bookData = async()=>{
-    let result = await fetch ('http://localhost:5000/books',{
+    let result = await fetch ('https://lms-smoky-one.vercel.app/books',{
       method: 'GET',
     })
     result= await result.json()
@@ -70,7 +70,7 @@ export default function ResponsiveDrawer(props) {
   }
 
   const userData = async()=>{
-    let result = await fetch ('http://localhost:5000/users',{
+    let result = await fetch ('https://lms-smoky-one.vercel.app/users',{
       method: 'GET',
     })
     result= await result.json()

@@ -54,7 +54,7 @@ export default function Homepage() {
   useEffect(() => {
     const fetchBorrowedBooks = async () => {
       try {
-        const result = await fetch('http://localhost:5000/users/borrowed',{
+        const result = await fetch('https://lms-smoky-one.vercel.app/users/borrowed',{
           method: 'GET',
           credentials: 'include',
         })
@@ -80,7 +80,7 @@ export default function Homepage() {
   []);
 
   const bookData = async()=>{
-    let result = await fetch ('http://localhost:5000/books',{
+    let result = await fetch ('https://lms-smoky-one.vercel.app/books',{
       method: 'GET',
     })
     result= await result.json()
