@@ -31,7 +31,7 @@ const drawerWidth = 1;
     useEffect(()=>{
       const userData = async () => {
         try {
-          const result = await fetch(`http://localhost:5000/users/${id}`, {
+          const result = await fetch(`https://lms-smoky-one.vercel.app/users/${id}`, {
             method: 'GET',
             credentials: 'include',
           });
@@ -41,7 +41,7 @@ const drawerWidth = 1;
             setUser(responseData.user);
             const bookData= await Promise.all (
               responseData.user.borrowedBooks.map(async(bookId)=>{
-                const bookResult= await fetch (`http://localhost:5000/books/${bookId}`, {
+                const bookResult= await fetch (`https://lms-smoky-one.vercel.app/books/${bookId}`, {
                 method: 'GET',
               });
               if (bookResult.ok){
@@ -70,7 +70,7 @@ const drawerWidth = 1;
 
       const handleDelete = async(id)=>{
         try {
-        let res =await fetch (`http://localhost:5000/users/${id}`,{
+        let res =await fetch (`https://lms-smoky-one.vercel.app/users/${id}`,{
           method: 'Delete'
         });
         const data = await res.json();

@@ -46,7 +46,7 @@ export default function StudentManagement() {
   },[])
 
   const userData = async()=>{
-    let result = await fetch ('http://localhost:5000/users',{
+    let result = await fetch ('https://lms-smoky-one.vercel.app/users',{
       method: 'GET',
     })
     result= await result.json()
