@@ -16,7 +16,7 @@ app.use(
     secret: 'xyz-116',
     resave: false,
     saveUninitialized: false,
-    cookie:{ secure:true},
+    cookie:{ maxAge: 180 * 60 * 1000 },
   })
 );
 
