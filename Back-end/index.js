@@ -16,7 +16,7 @@ app.use(
     secret: 'xyz-116',
     resave: false,
     saveUninitialized: false,
-    cookie:  cookie: { secure:true},
+    cookie:{ secure:true},
   })
 );
 
