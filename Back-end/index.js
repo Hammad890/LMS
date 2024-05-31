@@ -24,7 +24,7 @@ callDb()
 
 app.use(
     cors({
-      origin: "https://lms-fe-six.vercel.app/",
+      origin: "https://lms-fe-six.vercel.app",
       method: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     })
