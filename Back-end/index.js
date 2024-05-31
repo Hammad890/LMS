@@ -34,7 +34,7 @@ callDb()
 
 app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: "https://lms-fe-six.vercel.app",
       method: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     })
@@ -45,6 +45,4 @@ app.use("/books",bookRouter)
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Hello from Vercel' });
 });
-app.listen(5000, ()=>{
-    console.log("App started")
-})
+export default app;
