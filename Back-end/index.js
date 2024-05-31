@@ -4,6 +4,7 @@ import userRouter from "./routes/users.js";
 import bookRouter from "./routes/books.js";
 import cors from "cors"
 import session from "express-session";
+import mongoose from 'mongoose';
 import MongoStore from "connect-mongo";
 import dotenv from 'dotenv';
 dotenv.config();
