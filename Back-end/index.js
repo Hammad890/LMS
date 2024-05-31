@@ -4,6 +4,7 @@ import userRouter from "./routes/users.js";
 import bookRouter from "./routes/books.js";
 import cors from "cors"
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,12 +12,20 @@ dotenv.config();
 const app= express();
 app.use(json())
 
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+
 app.use(
   session({
     secret: 'xyz-116',
     resave: false,
     saveUninitialized: false,
-    cookie:{ maxAge: 180 * 60 * 1000 },
+    store: MongoStore.create({ 
+      mongoUrl: process.env.MONGO_URL,
+    }),
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
   })
 );
 
@@ -24,7 +33,7 @@ callDb()
 
 app.use(
     cors({
-      origin: "https://lms-fe-six.vercel.app",
+      origin: "http://localhost:3000",
       method: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     })
@@ -35,6 +44,6 @@ app.use("/books",bookRouter)
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Hello from Vercel' });
 });
-export default (req, res) => {
-  app(req, res);
-};
+app.listen(5000, ()=>{
+    console.log("App started")
+})
