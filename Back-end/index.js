@@ -6,6 +6,8 @@ import cors from "cors"
 import session from "express-session";
 import mongoose from 'mongoose';
 import MongoStore from "connect-mongo";
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -39,6 +41,8 @@ app.use(
       credentials: true,
     })
   );
+app.use(morgan('dev')); 
+app.use(cookieParser());
 
 app.use("/users",userRouter)
 app.use("/books",bookRouter)
