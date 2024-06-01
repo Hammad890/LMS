@@ -182,7 +182,7 @@ export const login= async (req,res,next)=>{
         if (user.role === "Admin" && user.username !== "admin") {
             return res.status(401).json({ error: "Admin does not exist" });
         }
-        req.session.userId= user._id;
+        req.session.userId= user.id;
         return res.status(200).json({user: ignorePassword(user.toJSON())})
     }catch(err){
         next (err)
