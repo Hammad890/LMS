@@ -11,9 +11,17 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 
+app.use(
+    cors({
+      origin: "https://lms-fe-six.vercel.app",
+      credentials: true,
+    })
+  );
 
 const app= express();
 app.use(json())
+app.use(morgan('dev')); 
+app.use(cookieParser());
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
@@ -34,15 +42,7 @@ app.use(
 
 callDb()
 
-app.use(
-    cors({
-      origin: "https://lms-fe-six.vercel.app",
-      method: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true,
-    })
-  );
-app.use(morgan('dev')); 
-app.use(cookieParser());
+
 app.use((req, res, next) => {
   console.log('Session:', req.session);
   next();
