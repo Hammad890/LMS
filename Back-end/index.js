@@ -43,6 +43,10 @@ app.use(
   );
 app.use(morgan('dev')); 
 app.use(cookieParser());
+app.use((req, res, next) => {
+  console.log('Session:', req.session);
+  next();
+});
 
 app.use("/users",userRouter)
 app.use("/books",bookRouter)
