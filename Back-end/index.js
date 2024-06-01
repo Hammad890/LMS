@@ -22,11 +22,6 @@ app.use(json())
 app.use(morgan('dev')); 
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-
 app.use(
   session({
     secret: 'xyz-116',
@@ -38,6 +33,11 @@ app.use(
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
   })
 );
+
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 
 callDb()
 
