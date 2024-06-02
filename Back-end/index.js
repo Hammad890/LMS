@@ -31,7 +31,7 @@ app.use(
       mongoUrl: process.env.MONGO_URL,
     }),
     cookie: { 
-        maxAge: 1000 * 60 * 60 * 24
+        maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
       secure:'production',
     },
