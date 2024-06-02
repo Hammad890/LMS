@@ -50,9 +50,12 @@ export default function Homepage() {
   },[])
 
   useEffect(() => {
-    console.log('User:', user);
-  console.log('Token:', token);
-    const fetchBorrowedBooks = async () => {
+    if (user && token) {
+      fetchBorrowedBooks();
+    }
+  }, [user, token, setUser]);
+
+   const fetchBorrowedBooks = async () => {
       try {
         const result = await fetch('https://lms-smoky-one.vercel.app/users/borrowed',{
           method: 'GET',
@@ -76,14 +79,8 @@ export default function Homepage() {
         console.error('Error fetching borrowed book data:', error);
       }
     };
-
-    if (user && token) {
-      console.log('Fetching borrowed books...');
-      fetchBorrowedBooks();
-    }
-  }, [user, token, setUser]);
-
-  const bookData = async()=>{
+  
+const bookData = async()=>{
     let result = await fetch ('https://lms-smoky-one.vercel.app/books',{
       method: 'GET',
     })
