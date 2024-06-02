@@ -62,6 +62,9 @@ export default function Bookview() {
     try {
       const result = await fetch('https://lms-smoky-one.vercel.app/users/user', {
         method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}` 
+      },
         credentials: 'include',
       });
 
