@@ -52,4 +52,10 @@ app.use("/books",bookRouter)
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Hello from Vercel' });
 });
+
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
+
 export default app;
