@@ -11,6 +11,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app= express();
+const isProduction = process.env.NODE_ENV === 'production';
 app.use(
     cors({
       origin: "https://lms-fe-six.vercel.app",
@@ -32,7 +33,8 @@ app.use(
     cookie: { 
         maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProduction, 
+        sameSite: isProduction ? 'none' : 'lax',
     },
       
   })
