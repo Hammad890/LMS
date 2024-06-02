@@ -26,7 +26,7 @@ export default function Bookview() {
   const {id} = useParams()
     
     const [book,setBook]= useState([])
-    const {user,loading} = useUser();
+    const {user,loading,token} = useUser();
     const navigate = useNavigate()
     
     useEffect(()=>{
@@ -69,7 +69,7 @@ export default function Bookview() {
       });
 
       if (result.status === 200) {
-        const { user } = await result.json();
+        const { user} = await result.json();
         return user;
       } else {
         const errorData = await result.json();
