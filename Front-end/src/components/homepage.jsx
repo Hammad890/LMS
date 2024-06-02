@@ -41,7 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function Homepage() {
   const [books,setBooks]= useState([]);
-  const {user,logOut,Admin,setUser}= useUser();
+  const {user,token,logOut,Admin,setUser}= useUser();
   // eslint-disable-next-line
   const [userType,
     setUserType]= useState("");
