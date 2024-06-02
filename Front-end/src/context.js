@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const userContext = createContext({
     user: null,
+    token: null,
     loginUser: ()=>{},
+    logOut: () => {},
 })
 
 const useUser = () => useContext(userContext);
@@ -110,7 +112,7 @@ const UserProvider= ({children})=>{
   }
  
   return(
-    <userContext.Provider value= {{user, loginUser,logOut,Admin,setUser}}>
+    <userContext.Provider value= {{user, token, loginUser,logOut,Admin,setUser}}>
         {children}
     </userContext.Provider>
   );
