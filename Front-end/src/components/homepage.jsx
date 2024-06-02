@@ -61,8 +61,10 @@ export default function Homepage() {
         },
           credentials: 'include',
         })
+        console.log('API Response:', result);
         if (result.status === 200) {
           const { books } = await result.json();
+          console.log('Fetched Books:', books);
           setUser(prevUser => ({
             ...prevUser,
             borrowedBooks: books || [] 
