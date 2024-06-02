@@ -56,6 +56,9 @@ export default function Homepage() {
       try {
         const result = await fetch('https://lms-smoky-one.vercel.app/users/borrowed',{
           method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}` 
+        },
           credentials: 'include',
         })
         if (result.status === 200) {
@@ -72,12 +75,10 @@ export default function Homepage() {
       }
     };
 
-    if (user) {
+    if (user && token) {
       fetchBorrowedBooks();
     }
-  }, 
-   // eslint-disable-next-line
-  []);
+  }, [user, token, setUser]);
 
   const bookData = async()=>{
     let result = await fetch ('https://lms-smoky-one.vercel.app/books',{
