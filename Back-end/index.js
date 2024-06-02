@@ -4,7 +4,6 @@ import userRouter from "./routes/users.js";
 import bookRouter from "./routes/books.js";
 import cors from "cors"
 import session from "express-session";
-import mongoose from 'mongoose';
 import MongoStore from "connect-mongo";
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
@@ -39,10 +38,6 @@ app.use(
   })
 );
 
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
 
 callDb()
 
