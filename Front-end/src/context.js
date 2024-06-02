@@ -14,7 +14,7 @@ const UserProvider= ({children})=>{
     const [user, setUser]= useState(null);
     const [Admin, setAdmin]= useState(false);
     const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState((localStorage.getItem('token')));
 
     useEffect(()=>{
         setAdmin (user && user.role === 'Admin');
@@ -70,7 +70,8 @@ const UserProvider= ({children})=>{
         if (response.status === 200) {
           const { user, token } = await response.json();
           setUser(user);
-          setToken(token);
+            localStorage.setItem('token', token);
+            setToken(token);
           return { user, error: null };
         } else {
           const { error } = await response.json();
@@ -93,6 +94,7 @@ const UserProvider= ({children})=>{
             credentials: 'include'
         });
          if (response.status === 200) {
+          localStorage.removeItem('token');
           setUser(null)
           setToken(null);
           navigate('/')
@@ -113,7 +115,7 @@ const UserProvider= ({children})=>{
  
   return(
     <userContext.Provider value= {{user, token, loginUser,logOut,Admin,setUser}}>
-        {children}
+        {!loading && children}
     </userContext.Provider>
   );
 
