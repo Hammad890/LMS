@@ -12,6 +12,7 @@ const UserProvider= ({children})=>{
     const [user, setUser]= useState(null);
     const [Admin, setAdmin]= useState(false);
     const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState(null);
 
     useEffect(()=>{
         setAdmin (user && user.role === 'Admin');
@@ -22,6 +23,9 @@ const UserProvider= ({children})=>{
         try {
           const result = await fetch('https://lms-smoky-one.vercel.app/users/user', {
             method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`  
+          },
             credentials: 'include',
           });
           if (result.status === 200) {
@@ -38,8 +42,12 @@ const UserProvider= ({children})=>{
         }
       };
     
-      fetchUser();
-    }, []);
+      if (token) {
+        fetchUser();
+    } else {
+        setLoading(false);
+    }
+    }, [token]);
     
 
     const navigate = useNavigate();
@@ -47,7 +55,7 @@ const UserProvider= ({children})=>{
   const loginUser = async(loginData)=>{
     try{
       console.log('Login Request:', loginData);
-        const response = await fetch ('https://lms-smoky-one.vercel.app/users',{
+        const response = await fetch ('https://lms-smoky-one.vercel.app//users',{
             method : 'POST',
             headers: {
                 'Content-Type':'application/json'
@@ -58,8 +66,9 @@ const UserProvider= ({children})=>{
         console.log('Login Response:', response);
 
         if (response.status === 200) {
-          const { user } = await response.json();
+          const { user, token } = await response.json();
           setUser(user);
+          setToken(token);
           return { user, error: null };
         } else {
           const { error } = await response.json();
@@ -75,10 +84,15 @@ const UserProvider= ({children})=>{
     try {
         const response = await fetch ('https://lms-smoky-one.vercel.app/users/logout',{
             method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}` 
+          },
+
             credentials: 'include'
         });
          if (response.status === 200) {
           setUser(null)
+          setToken(null);
           navigate('/')
       return { success: true, error: null };
     } else {
