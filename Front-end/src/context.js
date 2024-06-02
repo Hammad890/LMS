@@ -55,7 +55,7 @@ const UserProvider= ({children})=>{
   const loginUser = async(loginData)=>{
     try{
       console.log('Login Request:', loginData);
-        const response = await fetch ('https://lms-smoky-one.vercel.app//users',{
+        const response = await fetch ('https://lms-smoky-one.vercel.app/users',{
             method : 'POST',
             headers: {
                 'Content-Type':'application/json'
