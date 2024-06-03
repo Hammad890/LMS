@@ -57,10 +57,8 @@ const UserProvider= ({children})=>{
         console.log('Login Response:', response);
 
         if (response.status === 200) {
-          const { user, token } = await response.json();
+          const { user } = await response.json();
           setUser(user);
-            localStorage.setItem('token', token);
-            setToken(token);
           return { user, error: null };
         } else {
           const { error } = await response.json();
