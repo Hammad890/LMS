@@ -26,7 +26,7 @@ export default function Bookview() {
   const {id} = useParams()
     
     const [book,setBook]= useState([])
-    const {user,loading,token} = useUser();
+    const {user,loading} = useUser();
     const navigate = useNavigate()
     
     useEffect(()=>{
@@ -62,9 +62,6 @@ export default function Bookview() {
     try {
       const result = await fetch('https://lms-smoky-one.vercel.app/users/user', {
         method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}` 
-      },
         credentials: 'include',
       });
 
