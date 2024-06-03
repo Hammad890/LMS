@@ -193,6 +193,7 @@ export const login= async (req,res,next)=>{
     }
         console.log('Session created:', req.session);
         return res.status(200).json({user: ignorePassword(user.toJSON())})
+             });
     }catch(err){
         next (err)
     }
