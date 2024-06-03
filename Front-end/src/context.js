@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const userContext = createContext({
     user: null,
-    token: null,
     loginUser: ()=>{},
-    logOut: () => {},
 })
 
 const useUser = () => useContext(userContext);
@@ -14,7 +12,6 @@ const UserProvider= ({children})=>{
     const [user, setUser]= useState(null);
     const [Admin, setAdmin]= useState(false);
     const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState((localStorage.getItem('token')));
 
     useEffect(()=>{
         setAdmin (user && user.role === 'Admin');
@@ -25,9 +22,6 @@ const UserProvider= ({children})=>{
         try {
           const result = await fetch('https://lms-smoky-one.vercel.app/users/user', {
             method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${token}`  
-          },
             credentials: 'include',
           });
           if (result.status === 200) {
@@ -43,13 +37,8 @@ const UserProvider= ({children})=>{
           setLoading(false); 
         }
       };
-    
-      if (token) {
-        fetchUser();
-    } else {
-        setLoading(false);
-    }
-    }, [token]);
+    fetchUser();
+    }, []);
     
 
     const navigate = useNavigate();
@@ -87,16 +76,10 @@ const UserProvider= ({children})=>{
     try {
         const response = await fetch ('https://lms-smoky-one.vercel.app/users/logout',{
             method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${token}` 
-          },
-
             credentials: 'include'
         });
          if (response.status === 200) {
-          localStorage.removeItem('token');
           setUser(null)
-          setToken(null);
           navigate('/')
       return { success: true, error: null };
     } else {
@@ -114,8 +97,8 @@ const UserProvider= ({children})=>{
   }
  
   return(
-    <userContext.Provider value= {{user, token, loginUser,logOut,Admin,setUser}}>
-        {!loading && children}
+    <userContext.Provider value= {{user, loginUser,logOut,Admin,setUser}}>
+        {children}
     </userContext.Provider>
   );
 
