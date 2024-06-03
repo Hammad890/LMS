@@ -41,7 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function Homepage() {
   const [books,setBooks]= useState([]);
-  const {user,token,logOut,Admin,setUser}= useUser();
+  const {user,logOut,Admin,setUser}= useUser();
   const [userType,setUserType]= useState("");
   const navigate= useNavigate();
   
@@ -51,14 +51,10 @@ export default function Homepage() {
 
   useEffect(() => {
     console.log('User:', user);
-    console.log('Token:', token);
      const fetchBorrowedBooks = async () => {
       try {
         const result = await fetch('https://lms-smoky-one.vercel.app/users/borrowed',{
           method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}` 
-        },
           credentials: 'include',
         })
         console.log('API Response:', result);
@@ -76,10 +72,10 @@ export default function Homepage() {
         console.error('Error fetching borrowed book data:', error);
       }
     };
-    if (user && token) {
+    if (user) {
       fetchBorrowedBooks();
     }
-  }, [user, token]);
+  }, [user]);
 
   
   
