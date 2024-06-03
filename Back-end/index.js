@@ -4,7 +4,6 @@ import userRouter from "./routes/users.js";
 import bookRouter from "./routes/books.js";
 import cors from "cors"
 import session from "express-session";
-import MongoStore from "connect-mongo";
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
@@ -25,15 +24,8 @@ app.use(
   session({
     secret: 'xyz-116',
     resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ 
-      mongoUrl: process.env.MONGO_URL,
-    }),
-    cookie: { 
-        maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: true,
-    },
-      
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24}, 
   })
 );
 
