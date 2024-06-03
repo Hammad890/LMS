@@ -186,6 +186,11 @@ export const login= async (req,res,next)=>{
             return res.status(401).json({ error: "Admin does not exist" });
         }
         req.session.userId= user._id;
+         req.session.save((err) => {
+    if (err) {
+      console.error('Session save error:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
         console.log('Session created:', req.session);
         return res.status(200).json({user: ignorePassword(user.toJSON())})
     }catch(err){
