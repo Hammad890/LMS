@@ -19,7 +19,6 @@ export const getUser= async (req,res,next)=>{
 
 export const bookToBorrow= async(req,res,next)=>{
     try{
-        console.log('Fetching borrowed books for user:', req.session.userId);
         const book= await Book.findOne({isbn: req.body.isbn})
         if (book === null){
         return res.status(404).json({err: "Book not found"})
