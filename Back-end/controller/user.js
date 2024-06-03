@@ -84,8 +84,11 @@ export const borrowedBook= async(req,res,next)=>{
         if (!req.session || !req.session.userId) {
             return res.status(401).json({ error: "User is not authenticated" });
         }
-        const result= await Book.find({"borrowedBy" : {"$in": req.session.userId }})
-        return res.status(200).json({books: result})
+        const user = await User.findById(req.session.userId).populate('borrowedBooks');
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        return res.status(200).json({books: user.borrowedBooks})
     }catch(err){
         next(err)
     }
