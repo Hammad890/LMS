@@ -81,6 +81,7 @@ export const bookReturn = async(req,res,next)=>{
 
 export const borrowedBook= async(req,res,next)=>{
     try{
+        console.log('Session:', req.session);
         if (!req.session || !req.session.userId) {
             return res.status(401).json({ error: "User is not authenticated" });
         }
