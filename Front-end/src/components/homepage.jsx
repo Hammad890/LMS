@@ -59,7 +59,7 @@ const bookData = async()=>{
 
     
     console.log('User:', user);
-    console.log('books:',user.borrowedBooks);
+    
     
     
   const handleLoginClick = async () => {
