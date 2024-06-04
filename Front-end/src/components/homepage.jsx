@@ -57,33 +57,10 @@ const bookData = async()=>{
     setBooks(result.books)
   }
 
-    useEffect(() => {
+    
     console.log('User:', user);
-     const fetchBorrowedBooks = async () => {
-      try {
-        const result = await fetch('https://lms-smoky-one.vercel.app/users/borrowed',{
-          method: 'GET',
-          credentials: 'include',
-        })
-        console.log('API Response:', result);
-        if (result.status === 200) {
-          const { books } = await result.json();
-          console.log('Fetched Books:', books);
-          setUser(prevUser => ({
-            ...prevUser,
-            borrowedBooks: books || [] 
-          }));
-        } else {
-          console.error('Error fetching borrowed book data:', result.statusText);
-        }
-      } catch (error) {
-        console.error('Error fetching borrowed book data:', error);
-      }
-    };
-    if (user) {
-      fetchBorrowedBooks();
-    }
-  }, [user]);
+    console.log('books:',user.borrowedBooks);
+    
     
   const handleLoginClick = async () => {
     const { value } = await Swal.fire({
