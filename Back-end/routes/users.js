@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {getUser,bookToBorrow,bookReturn,login,showUser,logout,borrowedBook, createUser,deleteUser,getById,getBorrowedBook} from "../controller/user.js"
+import {getUser,bookToBorrow,bookReturn,login,showUser,logout,createUser,deleteUser,getById,getBorrowedBook} from "../controller/user.js"
 
 const route = Router()
 
