@@ -78,21 +78,7 @@ export const bookReturn = async(req,res,next)=>{
     }
 }
 
-export const borrowedBook= async(req,res,next)=>{
-    try{
-        console.log('Session:', req.session);
-        if (!req.session || !req.session.userId) {
-            return res.status(401).json({ error: "User is not authenticated" });
-        }
-        const user = await User.findById(req.session.userId).populate('borrowedBooks');
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-        return res.status(200).json({books: user.borrowedBooks})
-    }catch(err){
-        next(err)
-    }
-}
+
 
 export const getBorrowedBook = async (req,res,next)=>{
     try{
