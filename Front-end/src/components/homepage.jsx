@@ -100,7 +100,7 @@ const bookData = async()=>{
         });
       }
     }
-
+    const borrowedBooks = books.filter(book => user?.borrowedBooks?.includes(book._id));
   return (
     <>
     <div>
@@ -171,7 +171,7 @@ const bookData = async()=>{
             <div>
                 <Typography variant="h5">Borrowed Books</Typography>
             </div>
-            {user && user.borrowedBooks && user.borrowedBooks.length > 0 ? (
+            {borrowedBooks && borrowedBooks.length > 0 ? (
                 <>
                     <div>
                         <TableContainer component={Paper}>
@@ -186,7 +186,7 @@ const bookData = async()=>{
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {user.borrowedBooks.map((book) => (
+                                    {borrowedBooks.map((book) => (
                                         <TableRow key={book._id}>
                                             <TableCell component="th" scope="row">
                                                 {book.name}
