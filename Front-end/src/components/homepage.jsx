@@ -19,6 +19,7 @@ import { useUser } from '../context';
 import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useLocation } from 'react-router-dom';
 
 
 const drawerWidth = 1;
@@ -57,8 +58,7 @@ const bookData = async()=>{
     result= await result.json()
     setBooks(result.books)
   }
-
-    
+ 
     console.log('User:', user);
 
     const fetchBorrowedbooks = async()=>{
@@ -73,10 +73,12 @@ const bookData = async()=>{
         
       }
     };
-    
+    const location = useLocation()
     useEffect(()=>{
+      if (location.state?.updateBorrowedBooks){
       fetchBorrowedbooks();
-    },[]);
+      }
+    },[location.state]);
     
     
   const handleLoginClick = async () => {

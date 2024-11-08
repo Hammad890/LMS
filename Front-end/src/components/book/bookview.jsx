@@ -90,7 +90,8 @@ export default function Bookview() {
       });
       if (result.status === 200){
       const updatedBooks = await result.json();
-      setBook(updatedBooks.book)  
+      setBook(updatedBooks.book) 
+      navigate('/', { state: { updateBorrowedBooks: true } }); 
       }else{
         console.error('Error borrowing book',result.statusText);
       }
@@ -112,6 +113,7 @@ export default function Bookview() {
       if (result.status === 200){
         const updatedBooks = await result.json();
        setBook(updatedBooks.book)
+       navigate('/', { state: { updateBorrowedBooks: true } });
       }else{
         console.error('Error borrowing book',result.statusText);
       }
