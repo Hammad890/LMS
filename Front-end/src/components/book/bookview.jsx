@@ -90,8 +90,7 @@ export default function Bookview() {
       });
       if (result.status === 200){
       const updatedBooks = await result.json();
-      setBook(updatedBooks.book) 
-      navigate('/', { state: { updateBorrowedBooks: true } }); 
+      setBook(updatedBooks.book)  
       }else{
         console.error('Error borrowing book',result.statusText);
       }
@@ -113,7 +112,6 @@ export default function Bookview() {
       if (result.status === 200){
         const updatedBooks = await result.json();
        setBook(updatedBooks.book)
-       navigate('/', { state: { updateBorrowedBooks: true } });
       }else{
         console.error('Error borrowing book',result.statusText);
       }
@@ -209,7 +207,7 @@ return (
                               Array.isArray(book.borrowedBy) && !book.borrowedBy.includes(user._id)} >Return</Button>
                               </>
                               )}
-                              <Button type="submit" variant="contained" color="primary" style={{marginLeft:"48px"}} onClick={() => navigate('/')}>
+                              <Button type="submit" variant="contained" color="primary" style={{marginLeft:"48px"}} onClick={() => navigate('/',{ state: { updateBorrowedBooks: true } })}>
                                 Go Back
                             </Button>
                               </div>
